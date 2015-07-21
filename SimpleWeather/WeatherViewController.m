@@ -21,27 +21,47 @@
 
 @implementation WeatherViewController
 
+
+#pragma mark - Constants
+
+
+static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424828";
+
+
+#pragma mark - WeatherViewController Methods
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
     
-    // Simple test to make sure WeatherForecast method works
-    if (!_weatherForecast) {
-        _weatherForecast = [[WeatherForecast alloc] initWithQuery:@"SELECT * FROM weather.forecast WHERE woeid=23424828"];
-        
-        [[self webView] loadHTMLString:[_weatherForecast currentWeatherDescriptionHTML] baseURL:nil];
-    }
-
     // TODO: Show network activity indicator
-    
     // TODO: Possibly show a UI-blocking loading indicator
-        // TODO: Get WeatherForecast data
-        // TODO: Remove UI-blocking loading indicator
+    
+    [[self webView] loadHTMLString:[[self weatherForecast] currentWeatherDescriptionHTML] baseURL:nil];
+    
+    // TODO: Remove UI-blocking loading indicator
 }
+
+
+#pragma mark - Property Getters
+
+
+- (WeatherForecast *)weatherForecast
+{
+    if (!_weatherForecast) {
+        _weatherForecast = [[WeatherForecast alloc] initWithQuery:kDefaultQuery];
+    }
+    return _weatherForecast;
+}
+
+
+#pragma mark - Memory Methods
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 @end
