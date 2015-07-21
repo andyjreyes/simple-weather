@@ -7,6 +7,7 @@
 //
 
 #import "WeatherForecast.h"
+#import "YQL.h"
 
 @implementation WeatherForecast
 

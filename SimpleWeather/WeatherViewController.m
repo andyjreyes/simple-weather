@@ -17,6 +17,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    
+    // Show network activity indicator
+    
+    // Possibly show a UI-blocking loading indicator
+        // Get JSON data
+        // Remove UI-blocking loading indicator
 }
 
 - (void)didReceiveMemoryWarning {
