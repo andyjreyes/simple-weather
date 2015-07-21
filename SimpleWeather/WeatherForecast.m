@@ -16,6 +16,7 @@
 
 @end
 
+
 @implementation WeatherForecast
 
 
@@ -27,6 +28,9 @@
 
 
 #pragma mark - Constants
+
+
+static NSString *kYQLCurrentWeatherDescription = @"query.results.channel.item.description";
 
 
 #pragma mark - Init Methods
@@ -47,7 +51,7 @@
 }
 
 
-#pragma mark - JSON Parsing
+#pragma mark - JSON Parsing and Property Getters
 
 
 - (NSDictionary *) weatherResults
@@ -63,12 +67,10 @@
                 _weatherResults = results;
             }
         }
-        
-        NSLog(@"Results from YQL query:\n%@",[[_weatherResults valueForKeyPath:@"query.results"] description]);
-        
         return _weatherResults;
     }
 }
+
 
 - (NSString *)currentWeatherDescriptionHTML
 {
@@ -78,10 +80,11 @@
         NSDictionary *results = [self weatherResults];
         
         if (results && results.count > 0) {
-            _currentWeatherDescriptionHTML = [results valueForKeyPath:@"query.results.channel.item.description"];
+            _currentWeatherDescriptionHTML = [results valueForKeyPath:kYQLCurrentWeatherDescription];
         }
     }
     return _currentWeatherDescriptionHTML;
 }
+
 
 @end
