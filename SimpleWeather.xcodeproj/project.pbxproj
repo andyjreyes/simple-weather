@@ -14,6 +14,7 @@
 		A104F0F31B5DCAF500BB0253 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A104F0F21B5DCAF500BB0253 /* Images.xcassets */; };
 		A104F0F61B5DCAF500BB0253 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A104F0F41B5DCAF500BB0253 /* LaunchScreen.xib */; };
 		A104F1021B5DCAF500BB0253 /* SimpleWeatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F1011B5DCAF500BB0253 /* SimpleWeatherTests.m */; };
+		A104F10C1B5DCE3000BB0253 /* WeatherForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F10B1B5DCE3000BB0253 /* WeatherForecast.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,8 @@
 		A104F0FB1B5DCAF500BB0253 /* SimpleWeatherTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SimpleWeatherTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A104F1001B5DCAF500BB0253 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A104F1011B5DCAF500BB0253 /* SimpleWeatherTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SimpleWeatherTests.m; sourceTree = "<group>"; };
+		A104F10B1B5DCE3000BB0253 /* WeatherForecast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherForecast.m; sourceTree = "<group>"; };
+		A104F10D1B5DCE5400BB0253 /* WeatherForecast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherForecast.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +88,8 @@
 				A104F0ED1B5DCAF500BB0253 /* WeatherViewController.m */,
 				A104F0EF1B5DCAF500BB0253 /* Main.storyboard */,
 				A104F0E51B5DCAF500BB0253 /* Supporting Files */,
+				A104F10B1B5DCE3000BB0253 /* WeatherForecast.m */,
+				A104F10D1B5DCE5400BB0253 /* WeatherForecast.h */,
 			);
 			path = SimpleWeather;
 			sourceTree = "<group>";
@@ -222,6 +227,7 @@
 				A104F0EE1B5DCAF500BB0253 /* WeatherViewController.m in Sources */,
 				A104F0EB1B5DCAF500BB0253 /* AppDelegate.m in Sources */,
 				A104F0E81B5DCAF500BB0253 /* main.m in Sources */,
+				A104F10C1B5DCE3000BB0253 /* WeatherForecast.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
