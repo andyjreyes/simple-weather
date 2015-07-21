@@ -1,18 +1,18 @@
 //
-//  ViewController.m
+//  WeatherViewController.m
 //  SimpleWeather
 //
 //  Created by Andy Reyes on 7/20/15.
 //  Copyright (c) 2015 Andy Reyes. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "WeatherViewController.h"
 
-@interface ViewController ()
+@interface WeatherViewController ()
 
 @end
 
-@implementation ViewController
+@implementation WeatherViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

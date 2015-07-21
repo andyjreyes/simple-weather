@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		A104F0E81B5DCAF500BB0253 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F0E71B5DCAF500BB0253 /* main.m */; };
 		A104F0EB1B5DCAF500BB0253 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F0EA1B5DCAF500BB0253 /* AppDelegate.m */; };
-		A104F0EE1B5DCAF500BB0253 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F0ED1B5DCAF500BB0253 /* ViewController.m */; };
+		A104F0EE1B5DCAF500BB0253 /* WeatherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F0ED1B5DCAF500BB0253 /* WeatherViewController.m */; };
 		A104F0F11B5DCAF500BB0253 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A104F0EF1B5DCAF500BB0253 /* Main.storyboard */; };
 		A104F0F31B5DCAF500BB0253 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A104F0F21B5DCAF500BB0253 /* Images.xcassets */; };
 		A104F0F61B5DCAF500BB0253 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A104F0F41B5DCAF500BB0253 /* LaunchScreen.xib */; };
@@ -32,8 +32,8 @@
 		A104F0E71B5DCAF500BB0253 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A104F0E91B5DCAF500BB0253 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		A104F0EA1B5DCAF500BB0253 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		A104F0EC1B5DCAF500BB0253 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		A104F0ED1B5DCAF500BB0253 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A104F0EC1B5DCAF500BB0253 /* WeatherViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherViewController.h; sourceTree = "<group>"; };
+		A104F0ED1B5DCAF500BB0253 /* WeatherViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WeatherViewController.m; sourceTree = "<group>"; };
 		A104F0F01B5DCAF500BB0253 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A104F0F21B5DCAF500BB0253 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		A104F0F51B5DCAF500BB0253 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -81,13 +81,9 @@
 		A104F0E41B5DCAF500BB0253 /* SimpleWeather */ = {
 			isa = PBXGroup;
 			children = (
-				A104F0E91B5DCAF500BB0253 /* AppDelegate.h */,
-				A104F0EA1B5DCAF500BB0253 /* AppDelegate.m */,
-				A104F0EC1B5DCAF500BB0253 /* ViewController.h */,
-				A104F0ED1B5DCAF500BB0253 /* ViewController.m */,
+				A104F0EC1B5DCAF500BB0253 /* WeatherViewController.h */,
+				A104F0ED1B5DCAF500BB0253 /* WeatherViewController.m */,
 				A104F0EF1B5DCAF500BB0253 /* Main.storyboard */,
-				A104F0F21B5DCAF500BB0253 /* Images.xcassets */,
-				A104F0F41B5DCAF500BB0253 /* LaunchScreen.xib */,
 				A104F0E51B5DCAF500BB0253 /* Supporting Files */,
 			);
 			path = SimpleWeather;
@@ -96,6 +92,10 @@
 		A104F0E51B5DCAF500BB0253 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				A104F0F41B5DCAF500BB0253 /* LaunchScreen.xib */,
+				A104F0F21B5DCAF500BB0253 /* Images.xcassets */,
+				A104F0E91B5DCAF500BB0253 /* AppDelegate.h */,
+				A104F0EA1B5DCAF500BB0253 /* AppDelegate.m */,
 				A104F0E61B5DCAF500BB0253 /* Info.plist */,
 				A104F0E71B5DCAF500BB0253 /* main.m */,
 			);
@@ -219,7 +219,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A104F0EE1B5DCAF500BB0253 /* ViewController.m in Sources */,
+				A104F0EE1B5DCAF500BB0253 /* WeatherViewController.m in Sources */,
 				A104F0EB1B5DCAF500BB0253 /* AppDelegate.m in Sources */,
 				A104F0E81B5DCAF500BB0253 /* main.m in Sources */,
 			);
