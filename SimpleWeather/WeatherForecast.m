@@ -11,59 +11,77 @@
 
 @interface WeatherForecast ()
 
+@property (readonly) NSString *query;
+@property (readonly) NSDictionary *weatherResults;
+
 @end
 
 @implementation WeatherForecast
+
+
+#pragma mark - Synthesize
+
+
+@synthesize weatherResults = _weatherResults;
+@synthesize currentWeatherDescriptionHTML = _currentWeatherDescriptionHTML;
+
+
+#pragma mark - Constants
+
+
+#pragma mark - Init Methods
+
 
 - (instancetype)initWithQuery:(NSString *)query
 {
     self = [super init];
     if (self) {
         
-        NSDictionary *results = [self retrieveYQLResultsWithQuery:query];
-        
-        if (results) {
-            [self populateWeatherForecastWithResults:results];
+        if (!query || query.length <= 0) {
+            return nil;
         }
+        
+        _query = query;
     }
     return self;
 }
 
-- (NSDictionary *)retrieveYQLResultsWithQuery:(NSString *)query
+
+#pragma mark - JSON Parsing
+
+
+- (NSDictionary *) weatherResults
 {
-    // Make sure query exists
-    if (!query || query.length <= 0) {
-        return nil;
-    }
+    // Retrieves and stores the JSON data from Yahoo! Weather API
     
-    YQL *yql = [[YQL alloc] init];
-    
-    if (yql) {
-        NSDictionary *results = [yql query:query];
+    @synchronized(self) {
+        if (!_weatherResults) {
+            YQL *yql = [[YQL alloc] init];
+            
+            if (yql) {
+                NSDictionary *results = [yql query:[self query]];
+                _weatherResults = results;
+            }
+        }
         
-        NSLog(@"Results from YQL query:\n%@",[[results valueForKeyPath:@"query.results"] description]);
+        NSLog(@"Results from YQL query:\n%@",[[_weatherResults valueForKeyPath:@"query.results"] description]);
         
-        return results;
+        return _weatherResults;
     }
-    
-    return nil;
 }
 
-- (void)populateWeatherForecastWithResults:(NSDictionary *)results
+- (NSString *)currentWeatherDescriptionHTML
 {
-    // Using the NSDictionary of data, populate the WeatherForecast properties
+    // Retrieves and stores the HTML string for the current weather
     
-    if (!results || results.count <= 0) {
-        // TODO: Possibly make WeatherForecast's initializer failable, return a BOOL here
-        return;
-    }
-    
-    // WeatherForecast's properties should only be populated once
-    // TODO: Will most likely move each property to its own lazily-instantiated getter method
     if (!_currentWeatherDescriptionHTML) {
-        _currentWeatherDescriptionHTML = [results valueForKeyPath:@"query.results.channel.item.description"];
+        NSDictionary *results = [self weatherResults];
+        
+        if (results && results.count > 0) {
+            _currentWeatherDescriptionHTML = [results valueForKeyPath:@"query.results.channel.item.description"];
+        }
     }
-    
+    return _currentWeatherDescriptionHTML;
 }
 
 @end
