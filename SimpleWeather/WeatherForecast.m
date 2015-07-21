@@ -25,12 +25,16 @@
 
 @synthesize weatherResults = _weatherResults;
 @synthesize currentWeatherDescriptionHTML = _currentWeatherDescriptionHTML;
+@synthesize sunrise = _sunrise;
+@synthesize sunset = _sunset;
 
 
 #pragma mark - Constants
 
 
 static NSString *kYQLCurrentWeatherDescription = @"query.results.channel.item.description";
+static NSString *kYQLSunrise = @"query.results.channel.astronomy.sunrise";
+static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
 
 
 #pragma mark - Init Methods
@@ -86,5 +90,48 @@ static NSString *kYQLCurrentWeatherDescription = @"query.results.channel.item.de
     return _currentWeatherDescriptionHTML;
 }
 
+
+- (NSString *)sunrise
+{
+    if (!_sunrise) {
+        NSDictionary *results = [self weatherResults];
+        NSString* tempString = [[NSMutableString alloc] init];
+        
+        if (results && results.count > 0) {
+            tempString = [results valueForKeyPath:kYQLSunrise];
+            
+            // There is no available sunrise time
+            if ([tempString hasPrefix:@" "]) {
+                tempString = @"N/A";
+            }
+        }
+        
+        _sunrise = tempString;
+    }
+    
+    return _sunrise;
+}
+
+
+- (NSString *)sunset
+{
+    if (!_sunset) {
+        NSDictionary *results = [self weatherResults];
+        NSString* tempString = [[NSMutableString alloc] init];
+        
+        if (results && results.count > 0) {
+            tempString = [results valueForKeyPath:kYQLSunset];
+            
+            // There is no available sunset time
+            if ([tempString hasPrefix:@" "]) {
+                tempString = @"N/A";
+            }
+        }
+        
+        _sunset = tempString;
+    }
+    
+    return _sunset;
+}
 
 @end

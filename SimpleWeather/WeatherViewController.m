@@ -26,6 +26,8 @@
 
 
 static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424828";
+static NSString* kSunrisePrefix = @"Sunrise: %@";
+static NSString* kSunsetPrefix = @"Sunset: %@";
 
 
 #pragma mark - WeatherViewController Methods
@@ -38,6 +40,8 @@ static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23
     // TODO: Possibly show a UI-blocking loading indicator
     
     [[self webView] loadHTMLString:[[self weatherForecast] currentWeatherDescriptionHTML] baseURL:nil];
+    [self setSunriseTime:[[self weatherForecast] sunrise]];
+    [self setSunsetTime:[[self weatherForecast] sunset]];
     
     // TODO: Remove UI-blocking loading indicator
 }
@@ -52,6 +56,26 @@ static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23
         _weatherForecast = [[WeatherForecast alloc] initWithQuery:kDefaultQuery];
     }
     return _weatherForecast;
+}
+
+
+- (void)setSunriseTime:(NSString *)time
+{
+    if (!time || time.length <= 0) {
+        time = @"N/A";
+    }
+    
+    _sunriseLabel.text = [[NSString alloc] initWithFormat:kSunrisePrefix, time];
+}
+
+
+- (void)setSunsetTime:(NSString *)time
+{
+    if (!time || time.length <= 0) {
+        time = @"N/A";
+    }
+    
+    _sunsetLabel.text = [[NSString alloc] initWithFormat:kSunsetPrefix, time];
 }
 
 

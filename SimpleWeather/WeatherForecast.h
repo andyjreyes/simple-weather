@@ -12,7 +12,9 @@
 
 @interface WeatherForecast : NSObject
 
-@property (readonly) NSString* currentWeatherDescriptionHTML;
+@property (readonly) NSString *currentWeatherDescriptionHTML;
+@property (readonly) NSString *sunrise;
+@property (readonly) NSString *sunset;
 
 - (instancetype) initWithQuery:(NSString *)query;
 
