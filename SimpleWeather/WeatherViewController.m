@@ -11,7 +11,11 @@
 
 @interface WeatherViewController ()
 
-@property WeatherForecast *weatherForecast;
+@property (nonatomic)  WeatherForecast *weatherForecast;
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (weak, nonatomic) IBOutlet UILabel *sunriseLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sunsetLabel;
 
 @end
 
@@ -24,7 +28,8 @@
     // Simple test to make sure WeatherForecast method works
     if (!_weatherForecast) {
         _weatherForecast = [[WeatherForecast alloc] initWithQuery:@"SELECT * FROM weather.forecast WHERE woeid=23424828"];
-        NSLog(@"Weather HTML:\n%@", _weatherForecast.currentWeatherDescriptionHTML);
+        
+        [[self webView] loadHTMLString:[_weatherForecast currentWeatherDescriptionHTML] baseURL:nil];
     }
 
     // TODO: Show network activity indicator
