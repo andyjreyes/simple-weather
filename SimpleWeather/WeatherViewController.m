@@ -7,8 +7,11 @@
 //
 
 #import "WeatherViewController.h"
+#import "WeatherForecast.h"
 
 @interface WeatherViewController ()
+
+@property WeatherForecast *weatherForecast;
 
 @end
 
@@ -18,11 +21,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     
-    // Show network activity indicator
+    // Simple test to make sure WeatherForecast method works
+    if (!_weatherForecast) {
+        _weatherForecast = [[WeatherForecast alloc] initWithQuery:@"SELECT * FROM weather.forecast WHERE woeid=23424828"];
+        NSLog(@"Weather HTML:\n%@", _weatherForecast.currentWeatherDescriptionHTML);
+    }
+
+    // TODO: Show network activity indicator
     
-    // Possibly show a UI-blocking loading indicator
-        // Get JSON data
-        // Remove UI-blocking loading indicator
+    // TODO: Possibly show a UI-blocking loading indicator
+        // TODO: Get WeatherForecast data
+        // TODO: Remove UI-blocking loading indicator
 }
 
 - (void)didReceiveMemoryWarning {

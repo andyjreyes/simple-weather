@@ -12,6 +12,8 @@
 
 @interface WeatherForecast : NSObject
 
-- (instancetype) initWithQuery:(NSString*)query;
+@property (readonly) NSString* currentWeatherDescriptionHTML;
+
+- (instancetype) initWithQuery:(NSString *)query;
 
 @end
