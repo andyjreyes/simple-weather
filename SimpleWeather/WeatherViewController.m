@@ -39,36 +39,36 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self refreshView];
 }
 
 
-#pragma mark - ViewController Methods
-
-
 - (void)refreshView
 {
-    // Activity indicator when content is loading
-    [[self activityIndicator] startAnimating];
-    [[self activityIndicator] hidesWhenStopped];
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        _weatherForecast = nil;
-        NSString *query = _yqlQuery ? _yqlQuery : kDefaultQuery;
+    @synchronized(self)
+    {
+        // Activity indicator when content is loading
+        [[self activityIndicator] startAnimating];
+        [[self activityIndicator] hidesWhenStopped];
         
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        _weatherForecast = [[WeatherForecast alloc] initWithQuery:query];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [[self webView] loadHTMLString:_weatherForecast.currentWeatherDescriptionHTML baseURL:nil];
-            [self setSunriseTime:_weatherForecast.sunrise];
-            [self setSunsetTime:_weatherForecast.sunset];
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            _weatherForecast = nil;
+            NSString *query = _yqlQuery ? _yqlQuery : kDefaultQuery;
             
-            [[self activityIndicator] stopAnimating];
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            _weatherForecast = [[WeatherForecast alloc] initWithQuery:query];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[self webView] loadHTMLString:_weatherForecast.currentWeatherDescriptionHTML baseURL:nil];
+                [self setSunriseTime:_weatherForecast.sunrise];
+                [self setSunsetTime:_weatherForecast.sunset];
+                
+                [[self activityIndicator] stopAnimating];
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            });
         });
-    });
+    }
 }
 
 
@@ -89,6 +89,12 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
     }
     
     _sunsetLabel.text = [[NSString alloc] initWithFormat:kSunsetPrefix, time];
+}
+
+
+- (IBAction)refreshButtonPressed:(UIBarButtonItem *)sender {
+    
+    [self refreshView];
 }
 
 

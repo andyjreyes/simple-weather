@@ -71,7 +71,13 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Greeland Weather" id="zub-7l-7NT"/>
+                    <navigationItem key="navigationItem" title="Greeland Weather" id="zub-7l-7NT">
+                        <barButtonItem key="rightBarButtonItem" title="Refresh" style="plain" id="q2l-WV-au1">
+                            <connections>
+                                <action selector="refreshButtonPressed:" destination="BYZ-38-t0r" id="06I-Ua-2wz"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="06s-c6-BVb" id="oCg-RL-DmG"/>
                         <outlet property="sunriseLabel" destination="l7K-YA-2eL" id="idg-aE-5Mo"/>
