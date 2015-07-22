@@ -93,6 +93,8 @@ static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
 
 - (NSString *)sunrise
 {
+    // Gets the sunrise time, example: @"6:14 am"
+    
     if (!_sunrise) {
         NSDictionary *results = [self weatherResults];
         NSString* tempString = [[NSMutableString alloc] init];
@@ -115,6 +117,8 @@ static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
 
 - (NSString *)sunset
 {
+    // Gets the sunset time, example: @"7:22 pm"
+    
     if (!_sunset) {
         NSDictionary *results = [self weatherResults];
         NSString* tempString = [[NSMutableString alloc] init];
@@ -133,5 +137,6 @@ static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
     
     return _sunset;
 }
+
 
 @end

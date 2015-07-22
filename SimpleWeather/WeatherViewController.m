@@ -28,9 +28,11 @@
 #pragma mark - Constants
 
 
-static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424827";
+static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424828";
 static NSString* kSunrisePrefix = @"Sunrise: %@";
 static NSString* kSunsetPrefix = @"Sunset: %@";
+static NSString* kErrorTitle = @"Could not update weather";
+static NSString* kErrorMessage = @"Please try again";
 
 
 #pragma mark - WeatherViewController Methods
@@ -48,7 +50,7 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
 {
     @synchronized(self)
     {
-        // Activity indicator when content is loading
+        // Show activity indicator when content is loading
         [[self activityIndicator] startAnimating];
         [[self activityIndicator] hidesWhenStopped];
         
@@ -57,13 +59,22 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
             NSString *query = _yqlQuery ? _yqlQuery : kDefaultQuery;
             
             [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            
             _weatherForecast = [[WeatherForecast alloc] initWithQuery:query];
             
             dispatch_async(dispatch_get_main_queue(), ^{
-                [[self webView] loadHTMLString:_weatherForecast.currentWeatherDescriptionHTML baseURL:nil];
-                [self setSunriseTime:_weatherForecast.sunrise];
-                [self setSunsetTime:_weatherForecast.sunset];
+                if (_weatherForecast) {
+                    [[self webView] loadHTMLString:_weatherForecast.currentWeatherDescriptionHTML baseURL:nil];
+                    [self setSunriseTime:_weatherForecast.sunrise];
+                    [self setSunsetTime:_weatherForecast.sunset];
+                }
+                else{
+                    NSLog(@"Something went wrong, we don't have a weather forecast! Is your YQL query correct?");
+                    
+                    [self presentErrorAlert];
+                }
                 
+                // Hide activity and network indicators
                 [[self activityIndicator] stopAnimating];
                 [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
             });
@@ -95,6 +106,30 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
 - (IBAction)refreshButtonPressed:(UIBarButtonItem *)sender {
     
     [self refreshView];
+}
+
+- (void)presentErrorAlert
+{
+    UIAlertController *alertController = [UIAlertController
+                                          alertControllerWithTitle:kErrorTitle
+                                          message:kErrorMessage
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:@"OK"
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   NSLog(@"OK button pressed");
+                               }];
+    
+    if (alertController && okAction) {
+        [alertController addAction:okAction];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    else {
+        NSLog(@"An error occurred while showing our error alert message. Oh dear.");
+    }
 }
 
 
