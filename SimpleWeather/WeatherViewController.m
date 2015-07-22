@@ -17,6 +17,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *sunriseLabel;
 @property (weak, nonatomic) IBOutlet UILabel *sunsetLabel;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+
+
 @end
 
 @implementation WeatherViewController
@@ -35,15 +38,26 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
+    // Activity indicator when content is loading
+    [[self activityIndicator] startAnimating];
+    [[self activityIndicator] hidesWhenStopped];
     
-    // TODO: Show network activity indicator
-    // TODO: Possibly show a UI-blocking loading indicator
-    
-    [[self webView] loadHTMLString:[[self weatherForecast] currentWeatherDescriptionHTML] baseURL:nil];
-    [self setSunriseTime:[[self weatherForecast] sunrise]];
-    [self setSunsetTime:[[self weatherForecast] sunset]];
-    
-    // TODO: Remove UI-blocking loading indicator
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        if (!_weatherForecast) {
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            _weatherForecast = [[WeatherForecast alloc] initWithQuery:kDefaultQuery];
+        }
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [[self webView] loadHTMLString:[[self weatherForecast] currentWeatherDescriptionHTML] baseURL:nil];
+            [self setSunriseTime:[[self weatherForecast] sunrise]];
+            [self setSunsetTime:[[self weatherForecast] sunset]];
+            
+            [[self activityIndicator] stopAnimating];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
 }
 
 

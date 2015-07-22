@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7M-fA-A2E">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="551"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="551.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="551" id="PYD-cC-LhJ"/>
@@ -30,17 +30,21 @@
                                 </variation>
                             </webView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunrise:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l7K-YA-2eL">
-                                <rect key="frame" x="16" y="559" width="63" height="21"/>
+                                <rect key="frame" x="16" y="559" width="62.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sunset:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sqg-rZ-VaT">
-                                <rect key="frame" x="525" y="559" width="59" height="21"/>
+                                <rect key="frame" x="525" y="559" width="58.5" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="06s-c6-BVb">
+                                <rect key="frame" x="282" y="281" width="37" height="37"/>
+                                <color key="color" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
@@ -48,21 +52,28 @@
                             <constraint firstItem="Sqg-rZ-VaT" firstAttribute="top" secondItem="S7M-fA-A2E" secondAttribute="bottom" constant="8" symbolic="YES" id="1iD-zx-bSW"/>
                             <constraint firstItem="l7K-YA-2eL" firstAttribute="top" secondItem="S7M-fA-A2E" secondAttribute="bottom" constant="8" symbolic="YES" id="4m8-Ti-OzA"/>
                             <constraint firstAttribute="trailing" secondItem="S7M-fA-A2E" secondAttribute="trailing" id="CAK-Nx-AM9"/>
+                            <constraint firstAttribute="centerY" secondItem="06s-c6-BVb" secondAttribute="centerY" id="Id0-jJ-oBj"/>
                             <constraint firstItem="S7M-fA-A2E" firstAttribute="bottom" secondItem="wfy-db-euE" secondAttribute="top" id="Rph-DW-r62"/>
+                            <constraint firstItem="06s-c6-BVb" firstAttribute="centerX" secondItem="S7M-fA-A2E" secondAttribute="centerX" id="Ttz-tz-YKc"/>
                             <constraint firstItem="l7K-YA-2eL" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="aqR-uo-47z"/>
                             <constraint firstItem="Sqg-rZ-VaT" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="mnq-Ve-Xae"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Sqg-rZ-VaT" secondAttribute="bottom" constant="20" id="o1l-0s-t6t"/>
+                            <constraint firstAttribute="centerX" secondItem="06s-c6-BVb" secondAttribute="centerX" id="pfg-BU-akQ"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="l7K-YA-2eL" secondAttribute="bottom" constant="20" id="stS-65-xrQ"/>
+                            <constraint firstItem="06s-c6-BVb" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="202" id="tF8-MI-OAf"/>
                             <constraint firstItem="S7M-fA-A2E" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="v7G-2g-4hJ"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="Rph-DW-r62"/>
+                                <exclude reference="Ttz-tz-YKc"/>
+                                <exclude reference="tF8-MI-OAf"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Greeland Weather" id="zub-7l-7NT"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="06s-c6-BVb" id="oCg-RL-DmG"/>
                         <outlet property="sunriseLabel" destination="l7K-YA-2eL" id="idg-aE-5Mo"/>
                         <outlet property="sunsetLabel" destination="Sqg-rZ-VaT" id="Ifh-Rf-h2D"/>
                         <outlet property="webView" destination="S7M-fA-A2E" id="lG2-j7-vFI"/>
