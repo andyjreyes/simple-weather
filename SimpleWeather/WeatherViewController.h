@@ -10,6 +10,9 @@
 
 @interface WeatherViewController : UIViewController
 
+@property NSString *yqlQuery;
+
+- (void)refreshView;
 
 @end
 

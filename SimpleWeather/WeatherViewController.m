@@ -19,8 +19,8 @@
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
-
 @end
+
 
 @implementation WeatherViewController
 
@@ -28,7 +28,7 @@
 #pragma mark - Constants
 
 
-static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424828";
+static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424827";
 static NSString* kSunrisePrefix = @"Sunrise: %@";
 static NSString* kSunsetPrefix = @"Sunset: %@";
 
@@ -36,40 +36,39 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
 #pragma mark - WeatherViewController Methods
 
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
 
+    [self refreshView];
+}
+
+
+#pragma mark - ViewController Methods
+
+
+- (void)refreshView
+{
     // Activity indicator when content is loading
     [[self activityIndicator] startAnimating];
     [[self activityIndicator] hidesWhenStopped];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        if (!_weatherForecast) {
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-            _weatherForecast = [[WeatherForecast alloc] initWithQuery:kDefaultQuery];
-        }
+        _weatherForecast = nil;
+        NSString *query = _yqlQuery ? _yqlQuery : kDefaultQuery;
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        _weatherForecast = [[WeatherForecast alloc] initWithQuery:query];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[self webView] loadHTMLString:[[self weatherForecast] currentWeatherDescriptionHTML] baseURL:nil];
-            [self setSunriseTime:[[self weatherForecast] sunrise]];
-            [self setSunsetTime:[[self weatherForecast] sunset]];
+            [[self webView] loadHTMLString:_weatherForecast.currentWeatherDescriptionHTML baseURL:nil];
+            [self setSunriseTime:_weatherForecast.sunrise];
+            [self setSunsetTime:_weatherForecast.sunset];
             
             [[self activityIndicator] stopAnimating];
             [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
         });
     });
-}
-
-
-#pragma mark - Property Getters
-
-
-- (WeatherForecast *)weatherForecast
-{
-    if (!_weatherForecast) {
-        _weatherForecast = [[WeatherForecast alloc] initWithQuery:kDefaultQuery];
-    }
-    return _weatherForecast;
 }
 
 
@@ -96,7 +95,8 @@ static NSString* kSunsetPrefix = @"Sunset: %@";
 #pragma mark - Memory Methods
 
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
