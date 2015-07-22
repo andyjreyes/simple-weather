@@ -65,11 +65,13 @@ static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
     @synchronized(self) {
         if (!_weatherResults) {
             YQL *yql = [[YQL alloc] init];
+            NSDictionary *results = nil;
             
             if (yql) {
-                NSDictionary *results = [yql query:[self query]];
-                _weatherResults = results;
+                results = [yql query:[self query]];
             }
+            
+            _weatherResults = results;
         }
         return _weatherResults;
     }
@@ -82,10 +84,13 @@ static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
     
     if (!_currentWeatherDescriptionHTML) {
         NSDictionary *results = [self weatherResults];
+        NSString *htmlString = nil;
         
         if (results && results.count > 0) {
-            _currentWeatherDescriptionHTML = [results valueForKeyPath:kYQLCurrentWeatherDescription];
+            htmlString = [results valueForKeyPath:kYQLCurrentWeatherDescription];
         }
+        
+        _currentWeatherDescriptionHTML = htmlString;
     }
     return _currentWeatherDescriptionHTML;
 }
@@ -97,18 +102,18 @@ static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
     
     if (!_sunrise) {
         NSDictionary *results = [self weatherResults];
-        NSString* tempString = [[NSMutableString alloc] init];
+        NSString* sunriseString = nil;
         
         if (results && results.count > 0) {
-            tempString = [results valueForKeyPath:kYQLSunrise];
+            sunriseString = [results valueForKeyPath:kYQLSunrise];
             
             // There is no available sunrise time
-            if ([tempString hasPrefix:@" "]) {
-                tempString = @"N/A";
+            if ([sunriseString hasPrefix:@" "]) {
+                sunriseString = @"N/A";
             }
         }
         
-        _sunrise = tempString;
+        _sunrise = sunriseString;
     }
     
     return _sunrise;
@@ -121,18 +126,18 @@ static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
     
     if (!_sunset) {
         NSDictionary *results = [self weatherResults];
-        NSString* tempString = [[NSMutableString alloc] init];
+        NSString* sunsetString = nil;
         
         if (results && results.count > 0) {
-            tempString = [results valueForKeyPath:kYQLSunset];
+            sunsetString = [results valueForKeyPath:kYQLSunset];
             
             // There is no available sunset time
-            if ([tempString hasPrefix:@" "]) {
-                tempString = @"N/A";
+            if ([sunsetString hasPrefix:@" "]) {
+                sunsetString = @"N/A";
             }
         }
         
-        _sunset = tempString;
+        _sunset = sunsetString;
     }
     
     return _sunset;
