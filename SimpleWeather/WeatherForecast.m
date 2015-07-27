@@ -32,9 +32,9 @@
 #pragma mark - Constants
 
 
-static NSString *kYQLCurrentWeatherDescription = @"query.results.channel.item.description";
-static NSString *kYQLSunrise = @"query.results.channel.astronomy.sunrise";
-static NSString *kYQLSunset = @"query.results.channel.astronomy.sunset";
+NSString *const kYQLCurrentWeatherDescription = @"query.results.channel.item.description";
+NSString *const kYQLSunrise = @"query.results.channel.astronomy.sunrise";
+NSString *const kYQLSunset = @"query.results.channel.astronomy.sunset";
 
 
 #pragma mark - Init Methods

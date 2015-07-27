@@ -28,11 +28,11 @@
 #pragma mark - Constants
 
 
-static NSString* kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424828";
-static NSString* kSunrisePrefix = @"Sunrise: %@";
-static NSString* kSunsetPrefix = @"Sunset: %@";
-static NSString* kErrorTitle = @"Could not update weather";
-static NSString* kErrorMessage = @"Please try again";
+NSString *const kDefaultQuery = @"SELECT * FROM weather.forecast WHERE woeid=23424828";
+NSString *const kSunrisePrefix = @"Sunrise: %@";
+NSString *const kSunsetPrefix = @"Sunset: %@";
+NSString *const kErrorTitle = @"Could not update weather";
+NSString *const kErrorMessage = @"Please try again";
 
 
 #pragma mark - WeatherViewController Methods
