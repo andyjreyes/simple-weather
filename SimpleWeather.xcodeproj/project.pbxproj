@@ -16,7 +16,6 @@
 		A104F1021B5DCAF500BB0253 /* SimpleWeatherTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F1011B5DCAF500BB0253 /* SimpleWeatherTests.m */; };
 		A104F10C1B5DCE3000BB0253 /* WeatherForecast.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F10B1B5DCE3000BB0253 /* WeatherForecast.m */; };
 		A104F1101B5DD02B00BB0253 /* YQL.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F10F1B5DD02B00BB0253 /* YQL.m */; };
-		A104F1141B5DD0DE00BB0253 /* WeatherItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A104F1131B5DD0DE00BB0253 /* WeatherItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,8 +46,6 @@
 		A104F10D1B5DCE5400BB0253 /* WeatherForecast.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WeatherForecast.h; sourceTree = "<group>"; };
 		A104F10E1B5DD02B00BB0253 /* YQL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YQL.h; sourceTree = "<group>"; };
 		A104F10F1B5DD02B00BB0253 /* YQL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YQL.m; sourceTree = "<group>"; };
-		A104F1121B5DD0DE00BB0253 /* WeatherItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeatherItem.h; sourceTree = "<group>"; };
-		A104F1131B5DD0DE00BB0253 /* WeatherItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WeatherItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,8 +91,6 @@
 				A104F0ED1B5DCAF500BB0253 /* WeatherViewController.m */,
 				A104F10B1B5DCE3000BB0253 /* WeatherForecast.m */,
 				A104F10D1B5DCE5400BB0253 /* WeatherForecast.h */,
-				A104F1121B5DD0DE00BB0253 /* WeatherItem.h */,
-				A104F1131B5DD0DE00BB0253 /* WeatherItem.m */,
 				A104F0EF1B5DCAF500BB0253 /* Main.storyboard */,
 				A104F0E51B5DCAF500BB0253 /* Supporting Files */,
 			);
@@ -243,7 +238,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A104F0EE1B5DCAF500BB0253 /* WeatherViewController.m in Sources */,
-				A104F1141B5DD0DE00BB0253 /* WeatherItem.m in Sources */,
 				A104F1101B5DD02B00BB0253 /* YQL.m in Sources */,
 				A104F0EB1B5DCAF500BB0253 /* AppDelegate.m in Sources */,
 				A104F0E81B5DCAF500BB0253 /* main.m in Sources */,
@@ -444,6 +438,7 @@
 				A104F1071B5DCAF500BB0253 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A104F1081B5DCAF500BB0253 /* Build configuration list for PBXNativeTarget "SimpleWeatherTests" */ = {
 			isa = XCConfigurationList;
@@ -452,6 +447,7 @@
 				A104F10A1B5DCAF500BB0253 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
